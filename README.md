@@ -15,3 +15,4 @@ Hopefully by the end of the semester I will be able to
 *Fingers crossed especially for the point 3*
 
 
+![5be577c4af22cdc20844906220dbbee7](https://github.com/hanhop/stats220/assets/163072197/d03c44bb-d4ba-4e2e-96c3-459746f1bf0f)
