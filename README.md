@@ -3,7 +3,7 @@
 
 I will store notes and helpful learning resources in this repo 🕺🌟🪩
 
-Helpful websites for coding annotation on R studio: 
+Helpful websites for coding on R studio: 
 - https://www.w3schools.com/colors/colors_picker.asp
 - https://rmarkdown.rstudio.com/lesson-1.html
 
