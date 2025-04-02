@@ -1,0 +1,89 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+```
+
+```{css}
+
+```
+
+## Is it common to see a dog on a walk in NZ?
+If yes, what breeds are we seeing more of? This report explores these questions based on data collected from a survey. 
+
+
+These summary values show the minimum, maximum and mean amount of dogs seen on all recorded walks from the survey. On average 2.75 dogs are seen on a walk. You cannot see 0.75 of a dog so it is better to say: On average at least 2 dogs are seen on a walk.
+
+```{r}
+library(tidyverse)
+
+# Read csv to get data directly from Google Sheet
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQgk9_5KnvFgJWo0KGoN_xy-OaKYOI86Efby3y83F4zmPjUYIgSY0Fn8s7WEuzYpls7Dlf879Bof_Ey/pub?output=csv")
+
+# Rename variables and create new df
+latest_data <- logged_data %>%
+  rename(
+    dog_amount = 2, 
+    same_breed = 3,  
+    which_breed = 4   
+  )
+
+# values for amount of dogs seen in total
+min_dog_amount <- min(latest_data$dog_amount, na.rm = TRUE)
+max_dog_amount <- max(latest_data$dog_amount, na.rm = TRUE)
+mean_dog_amount <- mean(latest_data$dog_amount, na.rm = TRUE)
+
+print(min_dog_amount)
+print(max_dog_amount)
+print(mean_dog_amount)
+```
+
+The first graph explores whether or not it is common to see the same dog breed on a walk. From the graph we can see that it is slightly more common to not see the same breed in one walk.
+
+```{r}
+library(tidyverse)
+
+# Read csv to get data directly from Google Sheet
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQgk9_5KnvFgJWo0KGoN_xy-OaKYOI86Efby3y83F4zmPjUYIgSY0Fn8s7WEuzYpls7Dlf879Bof_Ey/pub?output=csv")
+
+# Rename variables and create new df
+latest_data <- logged_data %>%
+  rename(
+    dog_amount = 2, 
+    same_breed = 3,  
+    which_breed = 4   
+  )
+
+latest_data  %>% 
+  ggplot() +
+  geom_bar(aes(x = same_breed),
+           fill = "pink")+
+  labs(title = "Was the same breed of dog seen on one walk",
+       caption = "Source: Survey",
+       x = "Same breed",
+       y = "Amount")
+
+```
+
+The second graph shows how many dogs were seen on a walk vs if there were duplicates of a single breed seen. As the amount of dogs seen on a walk increases, so does the likelihood that we will see at least 2 of the same breed. 
+
+```{r}
+latest_data %>% 
+  ggplot() +
+  geom_bar(aes(x = dog_amount, fill = same_breed)) +
+  labs(title = "Dogs seen on a walk vs Same breed",
+       caption = "Source: Survey",
+       x = "Dog Breed",
+       y = "Amount")
+
+```
+
+
+
+
+
+
